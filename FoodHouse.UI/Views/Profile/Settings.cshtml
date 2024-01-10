@@ -1,0 +1,160 @@
+@model FoodHouse.UI.Models.ViewModel.Profile.ProfileSettingsViewModel;
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="Untree.co">
+    <link rel="shortcut icon" href="favicon.png">
+    <meta name="description" content=""/>
+    <meta name="keywords" content="bootstrap, bootstrap4"/>
+    <!-- Bootstrap CSS -->
+    <link href="~/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="~/css/tiny-slider.css" rel="stylesheet">
+    <link href="~/css/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
+    <title>Кабінет користувача - Налаштування</title>
+</head>
+<body class="body">
+<div class="sidebar-wrapper">
+    <nav class="open" id="openb">
+        <ul>
+            <li>
+                <button class="burger__button-btn nav-btn" id="burger">
+                    <span></span><span></span><span></span>
+                </button>
+            </li>
+            <li>
+                <a href="#" class="profile">
+                    <img src="~/images/icons/man_av.svg" alt="profile">
+                    <span class="nav-item">@Model.UserName</span>
+                </a>
+            </li>
+            <li>
+                <a asp-action="Index" asp-controller="Home" class="nav-menu">
+                    <i class="bx bxs-home nav-icon"></i>
+                    <span class="nav-item">Home</span>
+                </a>
+            </li>
+            <li>
+                <a asp-action="Index" asp-controller="Profile" class="nav-menu">
+                    <i class="bx bxs-box nav-icon"></i>
+                    <span class="nav-item">Orders Dashboard</span>
+                </a>
+            </li>
+            <li>
+                <a href="#" class="nav-menu">
+                    <i class="bx bxs-cog nav-icon"></i>
+                    <span class="nav-item">Settings</span>
+                </a>
+            </li>
+            <li>
+                <a asp-action="Logout" asp-controller="Autentificate" class="nav-menu">
+                    <i class="bx bx-log-in nav-icon"></i>
+                    <span class="nav-item">Log Out</span>
+                </a>
+            </li>
+            @if (Model.TypeUser == "Admin")
+            {
+                <li>
+                    <a asp-controller="Admin" asp-action="Users" class="nav-menu">
+                        <i class="bx bxs-user nav-icon"></i>
+                        <span class="nav-item">Profile Admin</span>
+                    </a>
+                </li>
+            }
+            else if (Model.TypeUser == "Courier")
+            {
+                <li>
+                    <a asp-controller="Courier" asp-action="Index" class="nav-menu">
+                        <i class="bx bxs-user nav-icon"></i>
+                        <span class="nav-item">Profile Courier</span>
+                    </a>
+                </li>
+            }
+        </ul>
+    </nav>
+    <div class="table-container mtb-3">
+        <div class="table-responsive">
+            <div class="change">
+                <form class="change-form" asp-action="Settings" asp-controller="Profile" method="post">
+                    @{
+                        if (!String.IsNullOrEmpty(Model != null ? Model.FirstNameMessage : string.Empty))
+                        {
+                            <input type="text" class="form-control" id="fname" asp-for="FirstName" required placeholder="Andrii" maxlength="13">
+                            <div class="alert alert-dismissible alert-danger problem">
+                                <p style="font-size:12px; text-align:center" class="mt-3">@Model.FirstNameMessage</p>
+                            </div>
+                        }
+                        else
+                        {
+                            <input type="text" class="form-control mb-2" id="fname" asp-for="FirstName" required placeholder="Andrii" maxlength="13">
+                        }
+
+                        if (!String.IsNullOrEmpty(Model != null ? Model.LastNameMessage : string.Empty))
+                        {
+                            <input type="text" class="form-control" id="lname" asp-for="LastName" required placeholder="Ivanov" maxlength="13">
+                            <div class="alert alert-dismissible alert-danger problem">
+                                <p style="font-size:12px; text-align:center" class="mt-3">@Model.LastNameMessage</p>
+                            </div>
+                        }
+                        else
+                        {
+                            <input type="text" class="form-control mb-2" id="lname" asp-for="LastName" required placeholder="Ivanov" maxlength="13">
+                        }
+
+                        if (!String.IsNullOrEmpty(Model != null ? Model.EmailMessage : string.Empty))
+                        {
+                            <input type="email" class="form-control" id="email" asp-for="Email" required placeholder="ivanovandrii@gmail.com">
+                            <div class="alert alert-dismissible alert-danger problem">
+                                <p style="font-size:12px; text-align:center" class="mt-3">@Model.EmailMessage</p>
+                            </div>
+                        }
+                        else
+                        {
+                            <input type="email" class="form-control mb-2" id="email" asp-for="Email" required placeholder="ivanovandrii@gmail.com">
+                        }
+
+                        if (!String.IsNullOrEmpty(Model != null ? Model.NumberMessage : string.Empty))
+                        {
+                            <input type="text" class="form-control" id="number" asp-for="Number" required placeholder="098 535-434" maxlength="15">
+
+                            <div class="alert alert-dismissible alert-danger problem">
+                                <p style="font-size:12px; text-align:center" class="mt-3">@Model.NumberMessage</p>
+                            </div>
+                        }
+                        else
+                        {
+                            <input type="text" class="form-control mb-2" id="number" asp-for="Number" required placeholder="098 535-434" maxlength="15">
+                        }
+
+                        if (!String.IsNullOrEmpty(Model != null ? Model.PasswordMessage : string.Empty))
+                        {
+                            <input type="text" class="form-control" id="password" asp-for="Password" required placeholder="df9Df1uu">
+                            <div class="alert alert-dismissible alert-danger problem">
+                                <p style="font-size:12px; text-align:center" class="mt-3">@Model.PasswordMessage</p>
+                            </div>
+                        }
+                        else
+                        {
+                            <input type="text" class="form-control mb-2" id="password" asp-for="Password" required placeholder="df9Df1uu">
+                        }
+                    }
+
+                    <input type="hidden" asp-for="StringId"/>
+                    <div class="settings-block">
+                        <button class="settings-change" type="submit">Change</button>
+                    </div>
+                </form>
+            </div>
+        </div >
+    </div >
+</div >
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script >
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script >
+<script src="~/js/site.js"></script >
+</body >
+</html >

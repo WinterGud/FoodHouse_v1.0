@@ -1,0 +1,110 @@
+﻿@model FoodHouse.UI.Models.ViewModel.Account.AccountLoginViewModel;
+@{
+	char data = '@';
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>FoodHouse - Авторизація</title>
+	<link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
+</head>
+<body>
+	<header class="register-header reviews-header">
+		<div class="logo-block">
+			<a class="logo" asp-action="Index" asp-controller="Home">
+				<i class="bx bx-store-alt logo-item"></i>
+				<div class="logo-title">Food<span>House</span></div>
+			</a>
+		</div>
+	</header>
+	<main class="register-main">
+		<div class="register-container">
+			<div class="reg-img">
+				<img src="~/images/img/log.png" style="max-height:700px" alt="img_1">
+			</div>
+			<form class="register-from" method="post">
+				<h2 class="form-title">АВТОРИЗАЦІЯ</h2>
+				@{
+					if (!String.IsNullOrEmpty(Model != null ? Model.EmailMessage : string.Empty))
+					{
+						<input type="email" class="form-control" id="email" asp-for="Email" required placeholder="ivanovandrii@gmail.com">
+						<div class="alert alert-dismissible alert-danger problem">
+							<p style="font-size:12px; text-align:center" class="mt-3">@Model.EmailMessage</p>
+						</div>
+					}
+					else
+					{
+						<input type="email" class="form-control mb-2" id="email" asp-for="Email" required placeholder="ivanovandrii@gmail.com">
+					}
+
+					if (!String.IsNullOrEmpty(Model != null ? Model.PasswordMessage : string.Empty))
+					{
+						<input type="password" class="form-control" id="password" asp-for="Password" required placeholder="df9Df1uu">
+						<div class="alert alert-dismissible alert-danger problem">
+							<p style="font-size:12px; text-align:center" class="mt-3">@Model.PasswordMessage</p>
+						</div>
+					}
+					else
+					{
+						<input type="password" class="form-control mb-2" id="password" asp-for="Password" required placeholder="df9Df1uu">
+					}
+				}
+				<div class="reg-link">
+					<button class="btn-register" type="submit">Вхід</button>
+					<div class="log-btn"><a asp-controller="Autentificate" asp-action="Register">Реєстрація</a></div>
+				</div>
+			</form>
+		</div>
+	</main>
+	<footer class="footer">
+		<div class="footer-wrapper">
+			<div class="footer-first">
+				<div class="footer-logo">
+					<a class="f-logo" href="#">
+						<!--                    <img src="~/images/icons/footer_logo.svg" class="logo-img" alt="logo_img">-->
+						<i class="bx bx-store-alt f-item"></i>
+						<div class="f-logo">FoodHouse</div>
+					</a>
+				</div>
+				<div class="footer-menu">
+					<a href="#">Меню</a>
+				</div>
+				<div class="footer-support">
+					<a href="#">Тех. підтримка</a>
+				</div>
+				<div class="footer-login">
+					<a asp-controller="Autentificate" asp-action="Login">Вхід в кабінет</a>
+				</div>
+			</div>
+			<div class="footer-second">
+				<h2 class="footer-social">СОЦІАЛЬНІ МЕРЕЖІ</h2>
+				<div class="footer-mediablock">
+					<div class="footer-media">
+						<a href="#">
+							<img src="~/images/icons/instagram.png" alt="instagram">
+							<div class="footer-instagram">@data FH_instagram</div>
+						</a>
+					</div>
+					<div class="footer-media">
+						<a href="#">
+							<img src="~/images/icons/facebook.png" alt="facebook">
+							<div class="footer-instagram">@data FH_facebook</div>
+						</a>
+					</div>
+					<div class="footer-media">
+						<a href="#">
+							<img src="~/images/icons/twitter.png" alt="twitter">
+							<div class="footer-instagram">@data FH_twitter</div>
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</footer>
+	<script src="https://unpkg.com/magic-snowflakes/dist/snowflakes.min.js"></script>
+	<script>new Snowflakes();</script>
+</body>
+</html>

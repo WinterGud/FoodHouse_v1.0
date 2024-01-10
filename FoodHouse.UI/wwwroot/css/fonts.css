@@ -1,0 +1,41 @@
+/* Gilroy SemiBold */
+@font-face {
+    font-family: 'Gilroy';
+    src: url('~/fonts/Gilroy-SemiBold.ttf') format('truetype');
+    font-weight: 600; /* Стиль SemiBold */
+  }
+  
+  /* Gilroy Regular */
+  @font-face {
+    font-family: 'Gilroy';
+    src: url('~/fonts/Gilroy-Regular.ttf') format('truetype');
+    font-weight: normal; /* Стиль Regular */
+  }
+  
+  /* Gilroy Medium */
+  @font-face {
+    font-family: 'Gilroy';
+    src: url('~/fonts/Gilroy-Medium.ttf') format('truetype');
+    font-weight: 500; /* Стиль Medium */
+  }
+  
+  /* Gilroy Light */
+  @font-face {
+    font-family: 'Gilroy';
+    src: url('~/fonts/Gilroy-Light.ttf') format('truetype');
+    font-weight: 300; /* Стиль Light */
+  }
+  
+  /* Gilroy ExtraBold */
+  @font-face {
+    font-family: 'Gilroy';
+    src: url('~/fonts/Gilroy-ExtraBold.ttf') format('truetype');
+    font-weight: 800; /* Стиль ExtraBold */
+  }
+  
+  /* Gilroy Bold */
+  @font-face {
+    font-family: 'Gilroy';
+    src: url('~/fonts/Gilroy-Bold.ttf') format('truetype');
+    font-weight: bold; /* Стиль Bold */
+  }

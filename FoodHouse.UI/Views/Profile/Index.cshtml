@@ -1,0 +1,124 @@
+@model FoodHouse.UI.Models.ViewModel.Profile.FrofileOrdersViewModel;
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="Untree.co">
+    <link rel="shortcut icon" href="favicon.png">
+    <meta name="description" content=""/>
+    <meta name="keywords" content="bootstrap, bootstrap4"/>
+    <!-- Bootstrap CSS -->
+    <link href="~/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="~/css/tiny-slider.css" rel="stylesheet">
+    <link href="~/css/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
+    <title>Кабінет користувача - Налаштування</title>
+</head>
+<body class="body">
+<div class="sidebar-wrapper">
+    <nav class="open" id="openb">
+        <ul>
+            <li>
+                <button class="burger__button-btn nav-btn" id="burger">
+                    <span></span><span></span><span></span>
+                </button>
+            </li>
+            <li>
+                <a href="#" class="profile">
+                    <img src="~/images/icons/man_av.svg" alt="profile">
+                    <span class="nav-item">@Model.UserName</span>
+                </a>
+            </li>
+            <li>
+                <a asp-action="Index" asp-controller="Home" class="nav-menu">
+                    <i class="bx bxs-home nav-icon"></i>
+                    <span class="nav-item">Home</span>
+                </a>
+            </li>
+            <li>
+                <a asp-action="Index" asp-controller="Profile" class="nav-menu">
+                    <i class="bx bxs-box nav-icon"></i>
+                    <span class="nav-item">Orders Dashboard</span>
+                </a>
+            </li>
+            <li>
+                <a asp-action="Settings" class="nav-menu">
+                    <i class="bx bxs-cog nav-icon"></i>
+                    <span class="nav-item">Settings</span>
+                </a>
+            </li>
+            @if (Model.TypeUser == "Admin")
+            {
+                <li>
+                    <a asp-controller="Admin" asp-action="Users" class="nav-menu">
+                        <i class="bx bxs-user nav-icon"></i>
+                        <span class="nav-item">Profile Admin</span>
+                    </a>
+                </li>
+            }
+            else if (Model.TypeUser == "Courier")
+            {
+                <li>
+                    <a asp-controller="Courier" asp-action="Index" class="nav-menu">
+                        <i class="bx bxs-user nav-icon"></i>
+                        <span class="nav-item">Profile Courier</span>
+                    </a>
+                </li>
+            }
+            <li>
+                <a asp-action="Logout" asp-controller="Autentificate" class="nav-menu">
+                    <i class="bx bx-log-in nav-icon"></i>
+                    <span class="nav-item">Log Out</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <div class="table-container mtb-3">
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>ID Order</th>
+                    <th>ID User</th>
+                    <th>ID Courier</th>
+                    <th>Total Price</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                @{
+                    if (Model != null)
+                    {
+                        foreach (var item in Model.Orders)
+                        {
+                            <tr>
+                                <td>@item.Id</td>
+                                <td>@item.UserId</td>
+                                <td>@item.CourierId</td>
+                                <td>@item.Total</td>
+                                <td>
+                                    <div class="action-buttons">
+                                        <form asp-action="DeleteOrder" asp-controller="Profile" method="post">
+                                            <button class="action-delete">Delete</button>
+                                            <input type="hidden" value="@item.Id" name="Id"/>
+                                        </form>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    }
+                }
+                </tbody >
+            </table >
+        </div >
+    </div >
+</div >
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script >
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script >
+<script src="~/js/site.js"></script >
+</body >
+</html >

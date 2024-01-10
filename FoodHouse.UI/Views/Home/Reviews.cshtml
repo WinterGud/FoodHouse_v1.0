@@ -1,0 +1,82 @@
+@model FoodHouse.UI.Models.ViewModel.Home.ReviewsHomeViewModel;
+@{
+    char data = '@';
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FoodHouse - Відгуки</title>
+    <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
+</head>
+<body>
+<header class="reviews-header">
+    <div class="logo-block">
+        <a class="logo" asp-action="Index" asp-controller="Home">
+            <i class="bx bx-store-alt logo-item"></i>
+            <div class="logo-title">Food<span>House</span></div>
+        </a>
+    </div>
+</header>
+<main class="reviews-main">
+    <h1 class="reviews-title">НАПИШІТЬ ВІДГУК ПРО НАШУ ДОСТАВКУ!</h1>
+    <form id="reviews-form" class="reviews-form" action="Reviews" method="post">
+        <input asp-for="Title" class="rev-form form-control" required placeholder="Заголовок для відгуку..." type="text">
+        <textarea asp-for="Description" maxlength="130" style="min-height: 200px; max-height: 200px;" class="rev-area form-control" required placeholder="Тут можна написати відгук..."></textarea>
+        <input type="hidden" asp-for="IsMan"/>
+        <input type="hidden" asp-for="UserName"/>
+        <button class="reviews-button">ВІДПРАВИТИ</button>
+    </form>
+</main>
+<footer class="footer">
+    <div class="footer-wrapper">
+        <div class="footer-first">
+            <div class="footer-logo">
+                <a class="f-logo" href="#">
+                    <i class="bx bx-store-alt f-item"></i>
+                    <div class="f-logo">FoodHouse</div>
+                </a>
+            </div>
+            <div class="footer-menu">
+                <a href="#">Меню</a>
+            </div>
+            <div class="footer-support">
+                <a href="#">Тех. підтримка</a>
+            </div>
+            <div class="footer-login">
+                <a asp-controller="Autentificate" asp-action="Login">Вхід в кабінет</a>
+            </div>
+        </div>
+        <div class="footer-second">
+            <h2 class="footer-social">СОЦІАЛЬНІ МЕРЕЖІ</h2>
+            <div class="footer-mediablock">
+                <div class="footer-media">
+                    <a href="#">
+                        <img src="~/images/icons/instagram.png" alt="instagram">
+                        <div class="footer-instagram">@data FH_instagram</div>
+                    </a>
+                </div>
+                <div class="footer-media">
+                    <a href="#">
+                        <img src="~/images/icons/facebook.png" alt="facebook">
+                        <div class="footer-instagram">@data FH_facebook</div>
+                    </a>
+                </div>
+                <div class="footer-media">
+                    <a href="#">
+                        <img src="~/images/icons/twitter.png" alt="twitter">
+                        <div class="footer-instagram">@data FH_twitter</div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script src="https://unpkg.com/magic-snowflakes/dist/snowflakes.min.js"></script>
+<script>new Snowflakes();</script>
+<script src="~/js/site.js"></script>
+</body>
+</html>

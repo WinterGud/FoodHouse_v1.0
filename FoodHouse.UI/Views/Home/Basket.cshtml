@@ -1,0 +1,140 @@
+@model FoodHouse.UI.Models.ViewModel.Home.BasketHomeViewModel;
+@{
+    char data = '@';
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="~/css/bootstrap.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
+    <link href="~/css/style.css" rel="stylesheet">
+    <title>FoodHouse - Корзина</title>
+    <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
+</head>
+<body>
+<header class="register-header cart-header">
+    <div class="logo-block">
+        <a class="logo" asp-action="Index" asp-controller="Home">
+            <i class="bx bx-store-alt logo-item"></i>
+            <div class="logo-title">Food<span>House</span></div>
+        </a>
+    </div>
+</header>
+
+<main class="cart-main">
+    <div class="cart-container mtb-3">
+        <div class="cart-responsive">
+            <table class="cart-table">
+                <thead>
+                <tr>
+                    <th>Фото товару</th>
+                    <th>Товар</th>
+                    <th>Ціна</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+
+                @{
+                    foreach (var item in Model.Products)
+                    {
+                        <tr>
+                            <div class="cart-row">
+                                <td>
+                                    <img src="data:image/png;base64,@item.Image" style="width: 110px; height: 110px" alt="img_1">
+                                </td>
+                                <td>@item.Title</td>
+                                <td>@item.Price грн</td>
+                                <td>
+                                    <form asp-action="DeleteFromBacket">
+                                        <button type="submit" class="remove-button">
+                                            <i class='bx bx-x'></i>
+                                        </button>
+                                        <Input type="hidden" value="@item.Id" name="id"/>
+                                    </form>
+                                </td>
+                            </div>
+                        </tr>
+                    }
+                }
+
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="cart-section">
+        <div class="cart-coupon">
+            <div class="coupon-title">Купон</div>
+            <div class="coupon-subtitle">Введіть код купону, якщо він у Вас є.</div>
+            <form asp-action="UseCoupon">
+                <input class="coupon-input form-control" aria-describedby="inputGroup-sizing-sm" name="coupon" type="text" placeholder="Введіть код купону">
+                <button type="submit" class="coupon-button">Застовувати купон</button>
+            </form>
+        </div>
+        <div class="cart-totals">
+            <div class="total-title">Замовлення</div>
+            <div class="total-subtotal">Проміжний підсумок: <span>@Model.PriceWithoutCoupon грн</span></div>
+            <div class="total-total">Ціна: <span>@Model.PriceWithCoupon грн</span></div>
+            <form asp-action="DoOrder">
+                <button class="total-button">Зробити замовлення</button>
+                <input type="hidden" asp-for="@Model.PriceWithCoupon"/>
+            </form>
+        </div>
+    </div>
+</main>
+
+<footer class="footer">
+    <div class="footer-wrapper">
+        <div class="footer-first">
+            <div class="footer-logo">
+                <a class="f-logo" href="#">
+                    <i class="bx bx-store-alt f-item"></i>
+                    <div class="f-logo">FoodHouse</div>
+                </a>
+            </div>
+            <div class="footer-menu">
+                <a href="#">Меню</a>
+            </div>
+            <div class="footer-support">
+                <a href="#">Тех. підтримка</a>
+            </div>
+            <div class="footer-login">
+                <a asp-controller="Autentificate" asp-action="Login">Вхід в кабінет</a>
+            </div>
+        </div>
+        <div class="footer-second">
+            <h2 class="footer-social">СОЦІАЛЬНІ МЕРЕЖІ</h2>
+            <div class="footer-mediablock">
+                <div class="footer-media">
+                    <a href="#">
+                        <img src="~/images/icons/instagram.png" alt="instagram">
+                        <div class="footer-instagram">@data FH_instagram</div>
+                    </a>
+                </div>
+                <div class="footer-media">
+                    <a href="#">
+                        <img src="~/images/icons/facebook.png" alt="facebook">
+                        <div class="footer-instagram">@data FH_facebook</div>
+                    </a>
+                </div>
+                <div class="footer-media">
+                    <a href="#">
+                        <img src="~/images/icons/twitter.png" alt="twitter">
+                        <div class="footer-instagram">@data FH_twitter</div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://unpkg.com/magic-snowflakes/dist/snowflakes.min.js"></script>
+<script>new Snowflakes();</script>
+<script src="~/js/site.js"></script>
+</body>
+</html>

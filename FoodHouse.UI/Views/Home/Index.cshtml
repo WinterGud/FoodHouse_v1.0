@@ -1,0 +1,363 @@
+﻿@using FoodHouse.UI.Dto
+@model FoodHouse.UI.Models.ViewModel.Home.IndexHomeViewModel
+@{
+    ViewData["Title"] = "Home Page";
+    char data = '@';
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FoodHouse - Основна сторінка</title>
+    <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
+</head>
+<body>
+<header class="header">
+    <div class="container">
+        <div class="nav-index">
+            <ul class="nav-ul">
+                <li>
+                    <a class="logo" href="#">
+<!--                        <img src="~/images/icons/logo.svg" class="logo-img" alt="logo_img">-->
+                        <i class="bx bx-store-alt logo-item"></i>
+                        <div class="logo-title">Food<span>House</span></div>
+                    </a>
+                </li>
+                <li class="nav-li">
+                    <a asp-action="Reviews" asp-controller="Home" class="menu menu-one reviews">Відгуки</a>
+                </li>
+                <li class="nav-li">
+                    <a asp-action="Contact" asp-controller="Home" class="menu contact">Контакти</a>
+                </li>
+                @{
+                    if (Model.UserName != null)
+                    {
+                        <li class="nav-li nav-profile">
+                            @if (Model.Sex)
+                            {
+                                <img src="~/images/icons/man_av.svg" alt="profil" class="user-pic" onclick="toggleMenu()">
+                            }
+                            else{
+                                 <img src="~/images/icons/wooman_av.svg" alt="profil" class="user-pic" onclick="toggleMenu()">
+                            }
+                        </li>
+                    }
+                    else
+                    {
+                        <button class="button-register">
+                            <a asp-action="Authorization" asp-controller="Home">Авторизація</a>
+                        </button>
+                    }
+                }
+
+            </ul>
+            <div class="sub-menu-wrap" id="subMenu">
+                <div class="sub-menu">
+                    <div class="user-info">
+                        <img class="user-pic" src="~/images/icons/man_av.svg" alt="profil">
+                        @if (Model.UserName != null)
+                        {
+                            <h3>@Model.UserName</h3>
+                        }
+                    </div>
+                    <hr>
+                    <a asp-action="Index" asp-controller="Profile" class="sub-menu-link">
+                        <i class="bx bx-user icon"></i>
+                        <p>Профіль</p>
+                        <span> </span>
+                    </a>
+                    <a asp-action="Basket" class="sub-menu-link">
+                        <i class="bx bx-basket icon"></i>
+                        <p>Корзина</p>
+                        <span> </span>
+                    </a>
+                    <a asp-action="Contact" class="sub-menu-link">
+                        <i class="bx bx-help-circle icon"></i>
+                        <p>Тех. підтримка</p>
+                        <span> </span>
+                    </a>
+                    <a asp-action="Logout" asp-controller="Autentificate" class="sub-menu-link">
+                        <i class="bx bx-log-out icon"></i>
+                        <p>Вийти</p>
+                        <span> </span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <img class="header-images" src="~/images/img/main_bg.png" alt="header-images">
+        <h1 class="header-title">Що можна замовити?</h1>
+        <div class="header-subtitle">
+            В нас ви зможете замовити різноманітні страви зі світової кухні,
+            зручно та швидко доставлені прямо до вашого порогу. Від ароматних
+            італійських делікатесів до соковитих стейків — ми задовольнимо всі
+            ваші кулінарні бажання.
+        </div>
+        <button class="header-button">
+            <a href="#">Замовити</a>
+        </button>
+    </div>
+</header>
+<main class="main">
+    <section class="promo">
+        <div class="container">
+            <div class="promo-wrapper">
+                <div class="promo-items">
+                    <h2 class="promo-title">25+</h2>
+                    <div class="promo-subtitle">хвилин</div>
+                    <div class="promo-descr">Середній час доставки</div>
+                </div>
+                <div class="promo-items">
+                    <h2 class="promo-title">30+</h2>
+                    <div class="promo-subtitle">позицій</div>
+                    <div class="promo-descr">різноманітних страв</div>
+                </div>
+                <div class="promo-items">
+                    <h2 class="promo-title">188+</h2>
+                    <div class="promo-subtitle">відгуків</div>
+                    <div class="promo-descr">Задоволених кілєнтів</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="second" id="menu">
+        <h2 class="second-base">ОБЕРІТЬ, ЩО БАЖАЄТЕ ЗАМОВИТИ</h2>
+        <div class="second-category">
+            <ul class="category-wrapper">
+                <li class="category-tab category-active hot-appetizers" data-category="hot">
+                    <div>Гарячі закуски</div>
+                </li>
+                <li class="category-tab cold-appetizers" data-category="cold">
+                    <div>Холодні закуски</div>
+                </li>
+                <li class="category-tab desserts" data-category="desserts">
+                    <div>Десерти</div>
+                </li>
+            </ul>
+        </div>
+        <div class="catalog-content">
+            <div class="second-wrapper hot-items">
+                @{
+                    foreach (var item in Model.Products.Where(u => u.TypeProduct == TypeProduct.Hot))
+                    {
+                        <div class="second-items">
+                            <img class="second-img" src="data:image/png;base64,@item.Image" alt="img_1">
+                            <h2 class="second-title">@item.Title</h2>
+                            <div class="second-descr">
+                                @item.Description
+                            </div>
+                            <div class="second-row">
+                                <div class="second-price">@item.Price грн</div>
+                                <a href="#" class="button-text">
+                                    <button value="@item.Id" class="button-buy">Хочу</button>
+                                </a>
+                                <i class="bx bx-check check-buy none"></i>
+                            </div>
+                        </div>
+                    }
+                }
+            </div>
+            <div class="second-wrapper cold-items" style="display: none;">
+                @{
+                    foreach (var item in Model.Products.Where(u => u.TypeProduct == TypeProduct.Cold))
+                    {
+                        <div class="second-items">
+                            <img class="second-img" src="data:image/png;base64,@item.Image" alt="img_1">
+                            <h2 class="second-title">@item.Title</h2>
+                            <div class="second-descr">
+                                @item.Description
+                            </div>
+                            <div class="second-row">
+                                <div class="second-price">@item.Price грн</div>
+                                <a href="#" class="button-text">
+                                    <button value="@item.Id" class="button-buy">Хочу</button>
+                                </a>
+                                <i class="bx bx-check check-buy none"></i>
+                            </div>
+                        </div>
+                    }
+                }
+            </div>
+            <div class="second-wrapper desserts-items" style="display: none;">
+                @{
+                    foreach (var item in Model.Products.Where(u => u.TypeProduct == TypeProduct.Desert))
+                    {
+                        <div class="second-items">
+                            <img class="second-img" src="data:image/png;base64,@item.Image" alt="img_1">
+                            <h2 class="second-title">@item.Title</h2>
+                            <div class="second-descr">
+                                @item.Description
+                            </div>
+                            <div class="second-row">
+                                <div class="second-price">@item.Price грн</div>
+                                <a href="#" class="button-text">
+                                    <button value="@item.Id" class="button-buy">Хочу</button>
+                                </a>
+                                <i class="bx bx-check check-buy none"></i>
+                            </div>
+                        </div>
+                    }
+                }
+            </div>
+        </div>
+    </section>
+    <section class="third">
+        <div class="container">
+            <div class="slider">
+                <div class="swiper">
+                    <div class="swiper-wrapper">
+                        @{
+                            foreach (var item in Model.Reviews)
+                            {
+                                <div class="third-wrapper swiper-slide">
+                                    <h2 class="third-title">@item.Title</h2>
+                                    <div class="third-descr">
+                                        @item.Description
+                                    </div>
+                                    <div class="third-avatar">
+                                        <div class="avatar-container">
+                                            @{
+                                                if (item.IsMan)
+                                                {
+                                                    <img class="avatar" src="~/images/icons/man_av.svg" alt="man_av">
+                                                }
+                                                else
+                                                {
+                                                    <img class="avatar" src="~/images/icons/wooman_av.svg" alt="wooman_av">
+                                                }
+                                            }
+
+                                        </div>
+                                        <div class="third-name">@item.UserName</div>
+                                    </div>
+                                </div>
+                            }
+                        }
+                    </div>
+                </div>
+                <!-- <button id="sliderNext" class="slider-btn slider-next">
+                    <img src="images/icons/right_arrow.svg" alt="right_arrow">
+                </button>
+                <button id="sliderPrev" class="slider-btn slider-prev">
+                    <img src="images/icons/left_arrow.svg" alt="left_arrow">
+                </button> -->
+            </div>
+        </div>
+    </section>
+</main>
+<footer class="footer">
+    <div class="footer-wrapper">
+        <div class="footer-first">
+            <div class="footer-logo">
+                <a class="f-logo" href="#">
+                    <i class="bx bx-store-alt f-item"></i>
+                    <div class="f-logo">FoodHouse</div>
+                </a>
+            </div>
+            <div class="footer-menu">
+                <a href="#">Меню</a>
+            </div>
+            <div class="footer-support">
+                <a href="#">Тех. підтримка</a>
+            </div>
+            <div class="footer-login">
+                <a asp-controller="Autentificate" asp-action="Login">Вхід в кабінет</a>
+            </div>
+        </div>
+        <div class="footer-second">
+            <h2 class="footer-social">СОЦІАЛЬНІ МЕРЕЖІ</h2>
+            <div class="footer-mediablock">
+                <div class="footer-media">
+                    <a href="#">
+                        <img src="~/images/icons/instagram.png" alt="instagram">
+                        <div class="footer-instagram">@data FH_instagram</div>
+                    </a>
+                </div>
+                <div class="footer-media">
+                    <a href="#">
+                        <img src="~/images/icons/facebook.png" alt="facebook">
+                        <div class="footer-instagram">@data FH_facebook</div>
+                    </a>
+                </div>
+                <div class="footer-media">
+                    <a href="#">
+                        <img src="~/images/icons/twitter.png" alt="twitter">
+                        <div class="footer-instagram">@data FH_twitter</div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://unpkg.com/magic-snowflakes/dist/snowflakes.min.js"></script>
+<script>new Snowflakes();</script>
+<script src="~/js/site.js"></script>
+</body>
+
+<footer>
+</footer>
+</html>
+
+
+@section Scripts{
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+	<script>
+
+
+		$(document).ready(function () {
+			$(document).on('click', '.button-buy', function (event) {
+				event.preventDefault();
+
+				var idValue = $(this).attr("value");
+
+
+				$.ajax({
+					type: "POST",
+					url: "/Home/AddToBacket",
+					data: {
+						id: idValue
+					},
+					dataType: "json",
+					success: function (result) {
+						
+					},
+					error: function (req, status, error) {
+
+					}
+				});
+			});
+
+		});
+
+	</script>
+    
+    <script>
+		$(document).ready(function () {
+
+		});
+
+		$('.button-basket').click(function () {
+			window.location.href = "/home/basket";
+		});
+
+		$('.button-register').click(function () {
+			window.location.href = "/home/authorization";
+		});
+
+		$('.reviews').click(function () {
+			window.location.href = "/home/reviews";
+		});
+
+		$('.contact').click(function () {
+			window.location.href = "/home/contact";
+		});
+
+		$('.button-login').click(function () {
+			window.location.href = "/home/login";
+		});
+	</script>
+}

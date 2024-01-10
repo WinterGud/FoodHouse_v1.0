@@ -1,0 +1,99 @@
+﻿@model FoodHouse.UI.Models.ViewModel.Admin.Coupons.CouponAddViewModel;
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="Untree.co">
+    <link rel="shortcut icon" href="favicon.png">
+    <meta name="description" content=""/>
+    <meta name="keywords" content="bootstrap, bootstrap4"/>
+    <!-- Bootstrap CSS -->
+    <link href="~/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="~/css/tiny-slider.css" rel="stylesheet">
+    <link href="~/css/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
+    <title>Кабінет користувача - Налаштування</title>
+</head>
+<body class="body">
+<div class="sidebar-wrapper">
+    <nav class="open" id="openb">
+        <ul>
+            <li>
+                <button class="burger__button-btn nav-btn" id="burger">
+                    <span></span><span></span><span></span>
+                </button>
+            </li>
+            <li>
+                <a href="#" class="profile">
+                    <img src="~/images/icons/man_av.svg" alt="profile">
+                    <span class="nav-item">@Model.UserName</span>
+                </a>
+            </li>
+            <li>
+                <a asp-action="Index" asp-controller="Profile" class="nav-menu">
+                    <i class="bx bxs-user nav-icon"></i>
+                    <span class="nav-item">Base page</span>
+                </a>
+            </li>
+            <li>
+                <a asp-action="Users" asp-controller="Admin" class="nav-menu">
+                    <i class="bx bxs-dashboard nav-icon"></i>
+                    <span class="nav-item">Users Dashboard</span>
+                </a>
+            </li>
+            <li>
+                <a asp-action="Orders" asp-controller="Admin" class="nav-menu">
+                    <i class="bx bxs-box nav-icon"></i>
+                    <span class="nav-item">Orders Dashboard</span>
+                </a>
+            </li>
+            <li>
+                <a asp-action="Products" asp-controller="Admin" class="nav-menu">
+                    <i class="bx bxs-category-alt nav-icon"></i>
+                    <span class="nav-item">Products Dashboard</span>
+                </a>
+            </li>
+            <li>
+                <a asp-action="Coupons" asp-controller="Admin" class="nav-menu">
+                    <i class="bx bxs-coupon nav-icon"></i>
+                    <span class="nav-item">Coupons Dashboard</span>
+                </a>
+            </li>
+            <li>
+                <a asp-action="Messages" asp-controller="Admin" class="nav-menu">
+                    <i class="bx bxs-envelope nav-icon"></i>
+                    <span class="nav-item">Messages Dashboard</span>
+                </a>
+            </li>
+            <li>
+                <a asp-action="Balance" class="nav-menu">
+                    <i class="bx bxs-wallet nav-icon"></i>
+                    <span class="nav-item">Ballance</span>
+                </a>
+            </li>
+            <li>
+                <a asp-action="Logout" asp-controller="Autentificate" class="nav-menu">
+                    <i class="bx bx-log-in nav-icon"></i>
+                    <span class="nav-item">Log Out</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <div class="table-container mtb-3">
+        <div class="table-responsive">
+            <form class="change-form comp-form" asp-action="AddCoupon" asp-controller="Admin" method="post">
+                <input type="text" class="form-control mb-2" asp-for="Coupon" required placeholder="df9Df1uu">
+                <input type="number" class="form-control mb-2" asp-for="Procent" required placeholder="Input 0 < 100">
+
+                <div class="btn-compblock">
+                    <button class="action-change" type="submit">Complate</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

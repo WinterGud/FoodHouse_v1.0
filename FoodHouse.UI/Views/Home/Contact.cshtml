@@ -1,0 +1,137 @@
+@model FoodHouse.UI.Models.ViewModel.Home.ContactHomeViewModel;
+@{
+	char data = '@';
+}
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport"
+		  content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<meta name="keywords" content="bootstrap, bootstrap4" />
+	<link href="~/css/bootstrap.min.css" rel="stylesheet">
+	<link href="~/css/style.css" rel="stylesheet">
+	<link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
+	<title>FoodHouse - Контакти</title>
+</head>
+<body>
+	<header class="register-header contact-header">
+		<div class="logo-block">
+			<a class="logo" asp-action="Index" asp-controller="Home">
+				<i class="bx bx-store-alt logo-item"></i>
+				<div class="logo-title">Food<span>House</span></div>
+			</a>
+		</div>
+	</header>
+
+	<main class="contact-main">
+		<div class="cont-flex">
+			<div class="contact-flex">
+				<div class="contact-item">
+					<div class="contact-img"><i class='bx bx-map'></i></div>
+					<div class="contact-text">43 Raymouth Rd. Baltemoer, London 3910</div>
+				</div>
+				<div class="contact-item">
+					<div class="contact-img"><i class='bx bx-envelope'></i></div>
+					<div class="contact-text"><a href="mailto:info@foodhouse.com">info@foodhouse.com</a></div>
+				</div>
+				<div class="contact-item">
+					<div class="contact-img"><i class='bx bx-phone'></i></div>
+					<div class="contact-text"><a href="tel:+380980874575">+ 38 (098) 087-4575</a></div>
+				</div>
+			</div>
+		</div>
+		<div class="form-flex">
+			<form class="contact-froms" asp-action="SendMessage">
+				<div class="contact-row">
+					<div class="contact-group">
+						<label class="contact-label" for="fname">Ім'я</label>
+						<input asp-for="FirstName" type="text" class="contact-form form-control" id="fname" name="FirstName" placeholder="Іван" maxlength="13" required>
+					</div>
+					<div class="contact-group">
+						<label class="contact-label" for="lname">Прізвище</label>
+						<input asp-for="LastName" type="text" class="contact-form form-control" id="lname" name="LastName" placeholder="Никрочук" maxlength="13" required>
+					</div>
+				</div>
+				<div class="contact-group">
+					<label class="contact-label" for="email">Email:</label>
+					<input asp-for="Email" type="email" class="contact-form form-control" id="email" name="Email" placeholder="ivan.email@gmail.com" required>
+				</div>
+				<div class="contact-group">
+					<label class="contact-label" for="message">Повідомлення:</label>
+					<textarea asp-for="Message" name="Message" style="min-height: 200px; max-height: 200px;" class="contact-area form-control" id="message" cols="30" rows="5" maxlength="350" placeholder="Повідомлення..." required></textarea>
+				</div>
+				<div class="cont-block">
+					<button type="submit" class="contact-button" data-bs-toggle="modal" data-bs-target="#contactModal">Відправити</button>
+				</div>
+			</form>
+		</div>
+		<div class="modal fade" id="contactModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h1 class="modal-title fs-5" id="exampleModalLabel">Дякуємо за відгук!</h1>
+						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+					</div>
+					<div class="modal-body">
+						Дякуємо Вам за відгук. Замовляйте ще щось в нашому ресторані!
+					</div>
+				</div>
+			</div>
+		</div>
+	</main>
+
+	<footer class="footer">
+		<div class="footer-wrapper">
+			<div class="footer-first">
+				<div class="footer-logo">
+					<a class="f-logo" href="#">
+						<!--                    <img src="~/images/icons/footer_logo.svg" class="logo-img" alt="logo_img">-->
+						<i class="bx bx-store-alt f-item"></i>
+						<div class="f-logo">FoodHouse</div>
+					</a>
+				</div>
+				<div class="footer-menu">
+					<a href="#">Меню</a>
+				</div>
+				<div class="footer-support">
+					<a href="#">Тех. підтримка</a>
+				</div>
+				<div class="footer-login">
+					<a asp-controller="Autentificate" asp-action="Login">Вхід в кабінет</a>
+				</div>
+			</div>
+			<div class="footer-second">
+				<h2 class="footer-social">СОЦІАЛЬНІ МЕРЕЖІ</h2>
+				<div class="footer-mediablock">
+					<div class="footer-media">
+						<a href="#">
+							<img src="~/images/icons/instagram.png" alt="instagram">
+							<div class="footer-instagram">@data FH_instagram</div>
+						</a>
+					</div>
+					<div class="footer-media">
+						<a href="#">
+							<img src="~/images/icons/facebook.png" alt="facebook">
+							<div class="footer-instagram">@data FH_facebook</div>
+						</a>
+					</div>
+					<div class="footer-media">
+						<a href="#">
+							<img src="~/images/icons/twitter.png" alt="twitter">
+							<div class="footer-instagram">@data FH_twitter</div>
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</footer>
+
+	<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<script src="https://unpkg.com/magic-snowflakes/dist/snowflakes.min.js"></script>
+	<script>new Snowflakes();</script>
+	<script src="~/js/site.js"></script>
+</body>
+</html>
